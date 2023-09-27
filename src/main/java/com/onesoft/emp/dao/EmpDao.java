@@ -2,9 +2,12 @@ package com.onesoft.emp.dao;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.onesoft.emp.controller.EmpController;
 import com.onesoft.emp.entity.Emp;
 import com.onesoft.emp.repository.EmpRepository;
 
@@ -13,6 +16,7 @@ public class EmpDao {
 
 	@Autowired
 	EmpRepository er;
+	private static final Logger logger = Logger.getLogger(EmpDao.class);
 
 	public String setEmp(Emp e) {
 
@@ -26,6 +30,8 @@ public class EmpDao {
 	}
 
 	public List<Emp> getAll() {
+		PropertyConfigurator.configure("log4j");
+		logger.info(er.findAll());
 
 		return er.findAll();
 	}

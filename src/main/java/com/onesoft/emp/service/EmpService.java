@@ -3,6 +3,8 @@ package com.onesoft.emp.service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +21,7 @@ public class EmpService {
 
 	@Autowired
 	EmpDao ed;
+	private static final Logger logger = Logger.getLogger(EmpService.class);
 
 	public String setEmp(Emp e) throws AgeNotEligibleException {
 
@@ -39,13 +42,15 @@ public class EmpService {
 	}
 
 	public String setAllEmp(List<Emp> e) throws SalaryNotEligibleException {
-		List<Emp> l = e.stream().filter(s -> s.getSalary() > 50000).toList();
+
+		List<Emp> l = e.stream().filter(s -> s.getSalary() < 50000).toList();
 		try {
 
 			if (l.isEmpty()) {
-				return ed.setAllEmp(e);
-			} else {
 				throw new SalaryNotEligibleException("You are Not Eligible");
+			} else {
+				return ed.setAllEmp(l);
+
 			}
 		} catch (SalaryNotEligibleException a) {
 			return a.getMessage();
@@ -54,6 +59,8 @@ public class EmpService {
 	}
 
 	public List<Emp> getAll() {
+		PropertyConfigurator.configure("log4j");
+		logger.info(ed.getAll());
 
 		return ed.getAll();
 	}

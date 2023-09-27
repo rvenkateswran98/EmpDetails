@@ -45,6 +45,7 @@ public class EmpController {
 
 	@GetMapping(value = "getAll")
 	public List<Emp> getAll() {
+		PropertyConfigurator.configure("log4j");
 
 		logger.info("this is gettAll");
 		logger.info(es.getAll());

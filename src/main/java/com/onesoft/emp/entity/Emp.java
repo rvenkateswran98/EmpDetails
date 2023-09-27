@@ -58,4 +58,13 @@ public class Emp {
 		this.salary = salary;
 	}
 
+	@Override
+	public String toString() {
+		return "Emp [id=" + id + ", name=" + name + ", age=" + age + ", gender=" + gender + ", salary=" + salary
+				+ ", getId()=" + getId() + ", getName()=" + getName() + ", getAge()=" + getAge() + ", getGender()="
+				+ getGender() + ", getSalary()=" + getSalary() + ", getClass()=" + getClass() + ", hashCode()="
+				+ hashCode() + ", toString()=" + super.toString() + "]";
+	}
+	
+
 }
