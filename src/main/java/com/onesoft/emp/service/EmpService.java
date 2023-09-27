@@ -44,16 +44,11 @@ public class EmpService {
 	public String setAllEmp(List<Emp> e) throws SalaryNotEligibleException {
 
 		List<Emp> l = e.stream().filter(s -> s.getSalary() < 50000).toList();
-		try {
 
-			if (l.isEmpty()) {
-				throw new SalaryNotEligibleException("You are Not Eligible");
-			} else {
-				return ed.setAllEmp(l);
-
-			}
-		} catch (SalaryNotEligibleException a) {
-			return a.getMessage();
+		if (l.isEmpty()) {
+			throw new SalaryNotEligibleException("You are Not Eligible");
+		} else {
+			return ed.setAllEmp(l);
 		}
 
 	}
